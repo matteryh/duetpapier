@@ -8,50 +8,51 @@
     <link rel="icon" type="image/x-icon" href="../logo.png">
 </head>
 <body>
-    <div class="container-fluid bg-warning sticky-top">
-        <div class="row"> 
-            <div class="col-12">
-                <!--Strona główna-->
-                <a href="../glowna" type="button" class="btn btn-warning text-white btn-lg float-start">
-                    <img src="../logo.png" class="rounded" style="height:45px;">
-                </a>
-                <!--Wybieranie kategorii-->
-                <div class="dropdown">
-                    <button type="button" class="btn btn-warning text-white float-start btn-lg" data-bs-toggle="dropdown">
-                        <img src="../menu.png" style="height:45px;">
-                    </button>
-                    <ul class="dropdown-menu">
-                        <?php
-                            $polaczenie=@mysqli_connect('localhost', 'root', '', 'duetpapier');
-                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM kategorie;");
-                            while($rezultat = mysqli_fetch_array($zapytanie))
-                            {
-                                echo "
-                                <li>
-                                    <form method='get' action='../produkty'>
-                                        <button class='dropdown-item' type='submit' name='kategoria' id='kategoria' value='$rezultat[id]'>$rezultat[nazwa]</button>
-                                    </form>
-                                </li>
-                                ";
-                            }
-                        ?>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+            <div class="container-fluid">
+                <a class="navbard-brand" href="../glowna"><img src="../logo.png" class="rounded" style="height:40px;"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="pasek">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="kategorie" role="button" data-bs-toggle="dropdown">Kategorie</a>
+                            <ul class="dropdown-menu" aria-labelledby="kategorie">
+                                <?php
+                                    $polaczenie=@mysqli_connect('localhost', 'root', '', 'duetpapier');
+                                    $zapytanie=mysqli_query($polaczenie, "SELECT * FROM kategorie;");
+                                    while($rezultat = mysqli_fetch_array($zapytanie))
+                                    {
+                                        echo "
+                                        <li>
+                                            <form method='get' action='../produkty'>
+                                                <button class='dropdown-item' type='submit' name='kategoria' id='kategoria' value='$rezultat[id]'>$rezultat[nazwa]</button>
+                                            </form>
+                                        </li>
+                                        "; 
+                                    }
+                                ?>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../konto">Konto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../koszyk">Koszyk</a>
+                        </li>
                     </ul>
+                    <form method='get' action='../produkty'>
+                        <div class="input-group">
+                            <input type='text' class='form-control' name='szukane' placeholder='Wpisz nazwę lub indeks' >
+                            <button type='submit' class='btn btn-outline-dark'>Wyszukaj</button>
+                        </div>
+                    </form>
                 </div>
-                <!--Wyszukiwanie-->
-                <a href="../wyszukiwanie" type="button" class="btn btn-warning text-white btn-lg float-start">
-                    <img src="../lupa.png" class="rounded" style="height:45px;">
-                </a>
-                <!--Koszyk-->
-                <a href="../koszyk" type="button" class="btn btn-warning text-white float-end btn-lg">
-                    <img src="../wózek.png" style="height:45px;">
-                </a>
-                <!--Konta-->
-                <a href="../konto" type="button" class="btn btn-warning text-white float-end btn-lg">
-                    <img src="../konto.png" style="height:45px;">
-                </a>
             </div>
-        </div>
-    </div>
+        </nav>
+    </header>
     <div class="container mb-4 mt-4">
         <div class="row">
             <?php
