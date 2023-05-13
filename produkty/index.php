@@ -72,7 +72,7 @@
                         <div class='col-12 col-md-6 col-lg-4 col-xl-3 mt-4'>
                             <h2>$rezultat[nazwa]</h2>
                             <p class='text-primary'>Indeks: $rezultat[indeks]</p>
-                            <img class='img-fluid d-block mx-auto' src='$rezultat[obraz]'>
+                            <img class='img-fluid d-block mx-auto' src='img/$rezultat[obraz].png' style='max-height: 300px;'>
                             <p>$rezultat[opis]</p>
                             <form method='get' action='../koszyk'>
                                 <div class='input-group input-group-sm mt-2'>
@@ -96,7 +96,7 @@
                         <div class='col-12 col-md-6 col-lg-4 col-xl-3 mt-4'>
                             <h2>$rezultat[nazwa]</h2>
                             <p class='text-primary'>Indeks: $rezultat[indeks]</p>
-                            <img class='img-fluid d-block mx-auto' src='$rezultat[obraz]'>
+                            <img class='img-fluid d-block mx-auto' src='img/$rezultat[obraz].png' style='max-height: 300px;'>
                             <p>$rezultat[opis]</p>
                             <form method='get' action='../koszyk'>
                                 <div class='input-group input-group-sm mt-2'>
