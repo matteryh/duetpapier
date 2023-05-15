@@ -11,7 +11,7 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-light bg-warning">
             <div class="container-fluid">
-                <a class="navbard-brand" href="../glowna"><img src="../logo.png" class="rounded" style="height:40px;"></a>
+                <a class="navbard-brand" href="../"><img src="../logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
                     <span class="navbar-toggler-icon"></span>
                 </button>

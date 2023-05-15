@@ -11,7 +11,7 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-light bg-warning">
             <div class="container-fluid">
-                <a class="navbard-brand" href="../glowna"><img src="../logo.png" class="rounded" style="height:40px;"></a>
+                <a class="navbard-brand" href="../"><img src="../logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -58,13 +58,14 @@
         <div class="row">
             <div class="col-12">
                 <?php
-                    if(isset($_SESSION['email']))
+                    if(isset($_SESSION['login']))
                     {
                         echo "<h4 class='display-4'>Konto</h4>
-                            <p class='mt-4'>Jesteś zalogowany jako <b>".$_SESSION['email']."</b></p>
-                            <a href='../zamowienia' type='button' class='btn btn-outline-warning'>Utworzone zamówienia</a>
+                            <p class='mt-4'>Jesteś zalogowany jako <b>".$_SESSION['login']."</b></p>
+                            <p><a href='../dane' type='button' class='btn btn-outline-warning'>Dane konta</a></p>
+                            <p><a href='../zamowienia' type='button' class='btn btn-outline-warning'>Utworzone zamówienia</a><p>
                             <form action='wyloguj.php' method='post'>
-                                <button type='submit' name='wyloguj' class='btn btn-outline-danger mt-3'>Wyloguj się</button>
+                                <button type='submit' name='wyloguj' class='btn btn-outline-danger'>Wyloguj się</button>
                             </form>";
                     }
                     else
@@ -72,25 +73,24 @@
                         echo "<h4 class='display-4'>Logowanie</h4>";
                         if(isset($_POST['zaloguj']))
                         {
-                            $email=$_POST['email'];
+                            $login=$_POST['login'];
                             $haslo=$_POST['haslo'];
-                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email' AND haslo='$haslo'");
+                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE login='$login' AND haslo='$haslo'");
                             $rezultat = mysqli_fetch_array($zapytanie);
                             if(is_array($rezultat))
                             {
-                                $_SESSION['email']=$rezultat['email'];
-                                $_SESSION['haslo']=$rezultat['haslo'];
+                                $_SESSION['login']=$rezultat['login'];
                                 echo("<meta http-equiv='refresh' content='1'>");
                             }
                             else
                             {
-                                echo "<div class='alert alert-danger mt-4'>Nieprawidłowy adres e-mail i/lub hasło!</div>";
+                                echo "<div class='alert alert-danger mt-4'>Nieprawidłowy adres login i/lub hasło!</div>";
                             }
                         }
                         echo "<form action='' method='post' class='was-validated'>
                             <div class='mt-4'>
-                                <label for='email' class='form-label'>Adres e-mail:</label>
-                                <input type='text' class='form-control' id='email' placeholder='Adres e-mail' name='email' required>
+                                <label for='login' class='form-label'>Login:</label>
+                                <input type='text' class='form-control' id='login' placeholder='Login' name='login' required>
                                 <div class='invalid-feedback'>Wypełnij to pole.</div>
                             </div>
                             <div class='mt-3'>

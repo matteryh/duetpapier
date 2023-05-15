@@ -11,7 +11,7 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-light bg-warning">
             <div class="container-fluid">
-                <a class="navbard-brand" href="../glowna"><img src="../logo.png" class="rounded" style="height:40px;"></a>
+                <a class="navbard-brand" href="../"><img src="../logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -69,18 +69,39 @@
                     while($rezultat = mysqli_fetch_array($zapytanie))
                     {
                         echo "
-                        <div class='col-12 col-md-6 col-lg-4 col-xl-3 mt-4'>
-                            <h2>$rezultat[nazwa]</h2>
-                            <p class='text-primary'>Indeks: $rezultat[indeks]</p>
-                            <img class='img-fluid d-block mx-auto' src='img/$rezultat[obraz].png' style='max-height: 300px;'>
-                            <p>$rezultat[opis]</p>
-                            <form method='get' action='../koszyk'>
-                                <div class='input-group input-group-sm mt-2'>
+                        <div class='col-12 col-md-6 col-lg-4 col-xl-3 mt-4 d-flex flex-wrap'>
+                            <div class='w-100'>
+                                <h2>$rezultat[nazwa]</h2>
+                                <p class='text-primary'>Indeks: $rezultat[indeks]</p>
+                                <img class='img-fluid d-block mx-auto' src='img/$rezultat[obraz].png' style='max-height: 250px;'>
+                                <div class='modal' id='a$rezultat[indeks]'>
+                                    <div class='modal-dialog'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h4 class='modal-title'>$rezultat[nazwa]</h4>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                <p class='text-primary'>Indeks: $rezultat[indeks]</p>
+                                                $rezultat[opis]
+                                            </div>
+                                            <div class='modal-footer'>
+                                                <button type='button' class='btn btn-outline-danger' data-bs-dismiss='modal'>Zamknij opis</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='d-flex flex-wrap align-content-end w-100'>
+                                <div class='d-grid w-100'>
+                                    <button type='button' class='btn btn-sm btn-outline-warning btn-block mb-2' data-bs-toggle='modal' data-bs-target='#a$rezultat[indeks]'>Opis</button>
+                                </div>
+                                <form method='get' action='../koszyk' class='input-group input-group-sm'>
                                     <input type='number' class='form-control' name='ilosc' id='ilosc' placeholder='Ilość' min='1'>
                                     <span class='input-group-text'>$rezultat[jednostka]</span>
                                     <button type='submit' name='indeks' value='$rezultat[indeks]' class='btn btn-outline-warning'>Dodaj do koszyka</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>";
                     }
                 }
@@ -93,18 +114,39 @@
                     while($rezultat = mysqli_fetch_array($zapytanie))
                     {
                         echo "
-                        <div class='col-12 col-md-6 col-lg-4 col-xl-3 mt-4'>
-                            <h2>$rezultat[nazwa]</h2>
-                            <p class='text-primary'>Indeks: $rezultat[indeks]</p>
-                            <img class='img-fluid d-block mx-auto' src='img/$rezultat[obraz].png' style='max-height: 300px;'>
-                            <p>$rezultat[opis]</p>
-                            <form method='get' action='../koszyk'>
-                                <div class='input-group input-group-sm mt-2'>
+                        <div class='col-12 col-md-6 col-lg-4 col-xl-3 mt-4 d-flex flex-wrap'>
+                            <div class='w-100'>
+                                <h2>$rezultat[nazwa]</h2>
+                                <p class='text-primary'>Indeks: $rezultat[indeks]</p>
+                                <img class='img-fluid d-block mx-auto' src='img/$rezultat[obraz].png' style='max-height: 250px;'>
+                                <div class='modal' id='a$rezultat[indeks]'>
+                                    <div class='modal-dialog'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h4 class='modal-title'>$rezultat[nazwa]</h4>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                <p class='text-primary'>Indeks: $rezultat[indeks]</p>
+                                                $rezultat[opis]
+                                            </div>
+                                            <div class='modal-footer'>
+                                                <button type='button' class='btn btn-outline-danger' data-bs-dismiss='modal'>Zamknij opis</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='d-flex flex-wrap align-content-end w-100'>
+                                <div class='d-grid w-100'>
+                                    <button type='button' class='btn btn-sm btn-outline-warning btn-block mb-2' data-bs-toggle='modal' data-bs-target='#a$rezultat[indeks]'>Opis</button>
+                                </div>
+                                <form method='get' action='../koszyk' class='input-group input-group-sm'>
                                     <input type='number' class='form-control' name='ilosc' id='ilosc' placeholder='Ilość' min='1'>
                                     <span class='input-group-text'>$rezultat[jednostka]</span>
                                     <button type='submit' name='indeks' value='$rezultat[indeks]' class='btn btn-outline-warning'>Dodaj do koszyka</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>";
                     }
                 }

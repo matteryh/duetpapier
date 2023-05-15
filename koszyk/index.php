@@ -11,7 +11,7 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-light bg-warning">
             <div class="container-fluid">
-                <a class="navbard-brand" href="../glowna"><img src="../logo.png" class="rounded" style="height:40px;"></a>
+                <a class="navbard-brand" href="../"><img src="../logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -21,6 +21,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="kategorie" role="button" data-bs-toggle="dropdown">Kategorie</a>
                             <ul class="dropdown-menu" aria-labelledby="kategorie">
                                 <?php
+                                    session_start();
                                     $polaczenie=@mysqli_connect('localhost', 'root', '', 'duetpapier');
                                     if(!empty($_GET)){
                                         header('Location: ' . basename(__FILE__));
@@ -62,31 +63,31 @@
             <div class="col-12">
 				<h4 class='display-4'>Koszyk</h4>
 				<?php
-                    if(isset($_SESSION['email']))
+                    if(isset($_SESSION['login']))
                     {
-						$email=$_SESSION['email'];
+						$login=$_SESSION['login'];
                         if(isset($_POST['zmiana']))
 						{
 							$zmiana=$_POST['zmiana'];
                             $ilosc=$_POST['ilosc'];
-							mysqli_query($polaczenie, "UPDATE koszyk SET ilosc='$ilosc' WHERE email='$email' AND indeks = '$zmiana';");
+							mysqli_query($polaczenie, "UPDATE koszyk SET ilosc='$ilosc' WHERE login='$login' AND indeks = '$zmiana';");
 						}
 						if(isset($_POST['usun']))
 						{
 							$usun=$_POST['usun'];
-							mysqli_query($polaczenie, "DELETE FROM koszyk WHERE email='$email' AND indeks='$usun';");
+							mysqli_query($polaczenie, "DELETE FROM koszyk WHERE login='$login' AND indeks='$usun';");
 						}
 						if(isset($_POST['usunwszystko']))
 						{
-							mysqli_query($polaczenie, "DELETE FROM koszyk WHERE email='$email';");
+							mysqli_query($polaczenie, "DELETE FROM koszyk WHERE login='$login';");
 						}
                         //tworzenie zamowienia
 						if(isset($_POST['utworz']))
 						{
-							$plik=$email.date("Y-m-d-H-i-s").".txt";
+							$plik=$login.date("Y-m-d-H-i-s").".txt";
                             $data=date("Y-m-d H:i:s");
                             $myfile=fopen("$plik", "a") or die("Nie można otworzyć pliku!");
-                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email';");
+                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE login='$login';");
 							while($rezultat = mysqli_fetch_array($zapytanie))
                             {
                                 $txt="\tDATA ZŁOŻENIA ZAMÓWIENIA
@@ -103,7 +104,7 @@ Lp.\tIndeks\tIlość\tJ.m.\tNazwa
                                 fwrite($myfile, $txt);
                             }
                             $lp=1;
-                            $zapytanie=mysqli_query($polaczenie, "SELECT koszyk.indeks, ilosc, nazwa, jednostka FROM koszyk, produkty WHERE email='$email' AND koszyk.indeks=produkty.indeks;");
+                            $zapytanie=mysqli_query($polaczenie, "SELECT koszyk.indeks, ilosc, nazwa, jednostka FROM koszyk, produkty WHERE login='$login' AND koszyk.indeks=produkty.indeks;");
 							while($rezultat = mysqli_fetch_array($zapytanie))
                             {
                                 $txt="$lp\t$rezultat[indeks]\t$rezultat[ilosc]\t$rezultat[jednostka]\t$rezultat[nazwa]\n";
@@ -111,34 +112,34 @@ Lp.\tIndeks\tIlość\tJ.m.\tNazwa
                                 $lp+=1;
                             }
                             fclose($myfile);
-                            mysqli_query($polaczenie, "INSERT INTO `zamowienia` VALUES (NULL, '$email', '$data', '$plik', 0) ;");
+                            mysqli_query($polaczenie, "INSERT INTO `zamowienia` VALUES (NULL, '$login', '$data', '$plik', 0) ;");
                             rename("$plik", "C:/zamowienia/$plik");
-                            mysqli_query($polaczenie, "DELETE FROM koszyk WHERE email='$email';");
+                            mysqli_query($polaczenie, "DELETE FROM koszyk WHERE login='$login';");
                             echo "<div class='alert alert-success mt-4'>Utworzono zamówienie. Możesz je zobaczyć i złożyć w zakładce <a href='../zamowienia'>Utworzone zamówienia</a></div>";
 						}
 						if(isset($_GET['indeks'])&&!empty($_GET['ilosc'])&&$_GET['ilosc']!=0)
 						{
 							$indeks=$_GET['indeks'];
 							$ilosc=$_GET['ilosc'];
-							$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE email='$email' AND indeks='$indeks';");
+							$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE login='$login' AND indeks='$indeks';");
                             $rezultat = mysqli_fetch_array($zapytanie);
 							if(is_array($rezultat))
                             {
-								$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE email='$email' AND indeks='$indeks';");
+								$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE login='$login' AND indeks='$indeks';");
 								$suma=$ilosc+$rezultat['ilosc'];
-								mysqli_query($polaczenie, "UPDATE koszyk SET ilosc = '$suma' WHERE email='$email' AND indeks = '$indeks';");
+								mysqli_query($polaczenie, "UPDATE koszyk SET ilosc = '$suma' WHERE login='$login' AND indeks = '$indeks';");
 							}
 							else
 							{
-								mysqli_query($polaczenie, "INSERT INTO koszyk (`id`, `email`, `indeks`, `ilosc`) VALUES (NULL, '$email', '$indeks', '$ilosc');");
+								mysqli_query($polaczenie, "INSERT INTO koszyk (`id`, `login`, `indeks`, `ilosc`) VALUES (NULL, '$login', '$indeks', '$ilosc');");
 							}
 						}
-						$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE email='$email';");
+						$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE login='$login';");
                         $rezultat = mysqli_fetch_array($zapytanie);
 						if(is_array($rezultat))
 						{
 							echo "<table class='table table-striped mt-4'><thead><tr><th>Indeks</th><th>Nazwa</th><th>Ilość</th><th>Usuń</th></tr></thead><tbody>";
-							$zapytanie=mysqli_query($polaczenie, "SELECT koszyk.indeks, ilosc, nazwa, jednostka FROM koszyk, produkty WHERE email='$email' AND koszyk.indeks=produkty.indeks;");
+							$zapytanie=mysqli_query($polaczenie, "SELECT koszyk.indeks, ilosc, nazwa, jednostka FROM koszyk, produkty WHERE login='$login' AND koszyk.indeks=produkty.indeks;");
 							while($rezultat = mysqli_fetch_array($zapytanie))
 							{
 								echo "<tr>
