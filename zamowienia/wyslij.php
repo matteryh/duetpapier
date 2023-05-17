@@ -14,7 +14,7 @@ if(isset($_POST['wyslij']))
 {
     session_start();
     $polaczenie=@mysqli_connect('localhost', 'root', '', 'duetpapier');
-    $login=$_SESSION['login'];
+    $email=$_SESSION['email'];
     $plik=$_POST['wyslij'];
     $mail = new PHPMailer(true);
 
@@ -30,7 +30,7 @@ if(isset($_POST['wyslij']))
     $mail->AddAddress('mateuszhonc@gmail.com'); //UZUPEŁNIĆ MAIL NA KTÓRY WYSYŁAMY
     $mail->isHTML(true);
     $mail->Subject='Zamowienie';
-    $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE login='$login';");
+    $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email';");
     while($rezultat = mysqli_fetch_array($zapytanie))
     {
         $mail->Body='Zamówienie wysłane przez '.$rezultat['imie'].' '.$rezultat['nazwisko'].' ('.$rezultat['email'].')';
@@ -40,7 +40,7 @@ if(isset($_POST['wyslij']))
 
     $mail->Send();
 
-    mysqli_query($polaczenie, "UPDATE zamowienia SET status=1 WHERE login='$login' AND plik='$plik';");
+    mysqli_query($polaczenie, "UPDATE zamowienia SET status=1 WHERE email='$login' AND plik='$plik';");
     header('Location: ./');
     mysqli_close($polaczenie);
 }

@@ -58,10 +58,10 @@
         <div class="row">
             <div class="col-12">
                 <?php
-                    if(isset($_SESSION['login']))
+                    if(isset($_SESSION['email']))
                     {
                         echo "<h4 class='display-4'>Konto</h4>
-                            <p class='mt-4'>Jesteś zalogowany jako <b>".$_SESSION['login']."</b></p>
+                            <p class='mt-4'>Jesteś zalogowany jako <b>".$_SESSION['email']."</b></p>
                             <p><a href='../dane' type='button' class='btn btn-outline-warning'>Dane konta</a></p>
                             <p><a href='../zamowienia' type='button' class='btn btn-outline-warning'>Utworzone zamówienia</a><p>
                             <form action='wyloguj.php' method='post'>
@@ -73,24 +73,24 @@
                         echo "<h4 class='display-4'>Logowanie</h4>";
                         if(isset($_POST['zaloguj']))
                         {
-                            $login=$_POST['login'];
+                            $email=$_POST['email'];
                             $haslo=$_POST['haslo'];
-                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE login='$login' AND haslo='$haslo'");
+                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email' AND haslo='$haslo'");
                             $rezultat = mysqli_fetch_array($zapytanie);
                             if(is_array($rezultat))
                             {
-                                $_SESSION['login']=$rezultat['login'];
+                                $_SESSION['email']=$rezultat['email'];
                                 echo("<meta http-equiv='refresh' content='1'>");
                             }
                             else
                             {
-                                echo "<div class='alert alert-danger mt-4'>Nieprawidłowy adres login i/lub hasło!</div>";
+                                echo "<div class='alert alert-danger mt-4'>Nieprawidłowy adres email i/lub hasło!</div>";
                             }
                         }
                         echo "<form action='' method='post' class='was-validated'>
                             <div class='mt-4'>
-                                <label for='login' class='form-label'>Login:</label>
-                                <input type='text' class='form-control' id='login' placeholder='Login' name='login' required>
+                                <label for='email' class='form-label'>Adres e-mail:</label>
+                                <input type='text' class='form-control' id='email' placeholder='email' name='email' required>
                                 <div class='invalid-feedback'>Wypełnij to pole.</div>
                             </div>
                             <div class='mt-3'>

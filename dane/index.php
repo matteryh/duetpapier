@@ -59,31 +59,25 @@
             <div class="col-12">
                 <h4 class="display-4">Dane konta</h4>
                 <?php
-                    if(isset($_SESSION['login']))
+                    if(isset($_SESSION['email']))
                     {
-                        $login=$_SESSION['login'];
+                        $email=$_SESSION['email'];
                         if(isset($_POST['zmien']))
                         {
-                            $email=$_POST['email'];
                             $imie=$_POST['imie'];
                             $nazwisko=$_POST['nazwisko'];
                             $telefon=$_POST['telefon'];
                             $firma=$_POST['firma'];
                             $nip=$_POST['nip'];
-                            mysqli_query($polaczenie, "UPDATE uzytkownicy SET email='$email', firma='$firma', nazwisko='$nazwisko', imie='$imie', telefon='$telefon', nip='$nip' WHERE login='$login';");
+                            mysqli_query($polaczenie, "UPDATE uzytkownicy SET firma='$firma', nazwisko='$nazwisko', imie='$imie', telefon='$telefon', nip='$nip' WHERE email='$email';");
                             echo "<div class='alert alert-success mt-4'>Pomyślnie zmieniono dane</div>";
                         }
-                        $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE login='$login';");
+                        $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email';");
                         while($rezultat = mysqli_fetch_array($zapytanie))
                         {
                             echo "
                             <form action='' class='was-validated' method='post'>
                                 <div class='mt-4'>
-                                    <label for='email' class='form-label'>Adres e-mail:</label>
-                                    <input type='text' class='form-control' id='email' placeholder='Adres e-mail' name='email' value='$rezultat[email]' required>
-                                    <div class='invalid-feedback'>Wypełnij to pole.</div>
-                                </div>
-                                <div class='mt-3'>
                                     <label for='imie' class='form-label'>Imię:</label>
                                     <input type='text' class='form-control' id='imie' placeholder='Imię' name='imie' value='$rezultat[imie]' required>
                                     <div class='invalid-feedback'>Wypełnij to pole.</div>

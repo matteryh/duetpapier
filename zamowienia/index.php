@@ -59,8 +59,8 @@
             <div class="col-12">
                 <h4 class="display-4">Utworzone zamówienia</h4>
                 <?php
-                    $login=$_SESSION['login'];
-                    $zapytanie=mysqli_query($polaczenie, "SELECT * FROM zamowienia WHERE login='$login';");
+                    $email=$_SESSION['email'];
+                    $zapytanie=mysqli_query($polaczenie, "SELECT * FROM zamowienia WHERE email='$email';");
                     $rezultat = mysqli_fetch_array($zapytanie);
                     if(is_array($rezultat))
                     {
@@ -69,7 +69,7 @@
                                 <tr><th></th><th>Data utworzenia zamówienia</th><th>Pobierz zamówienie</th><th>Złóż zamówienie</th></tr>
                             </thead>
                             <tbody>";
-                        $zapytanie=mysqli_query($polaczenie, "SELECT * FROM zamowienia WHERE login='$login' ORDER BY data DESC;");
+                        $zapytanie=mysqli_query($polaczenie, "SELECT * FROM zamowienia WHERE email='$email' ORDER BY data DESC;");
                         while($rezultat = mysqli_fetch_array($zapytanie))
                         {
                             echo "<tr>
