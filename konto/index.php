@@ -90,7 +90,7 @@
                         echo "<form action='' method='post' class='was-validated'>
                             <div class='mt-4'>
                                 <label for='email' class='form-label'>Adres e-mail:</label>
-                                <input type='text' class='form-control' id='email' placeholder='email' name='email' required>
+                                <input type='text' class='form-control' id='email' placeholder='Adres e-mail' name='email' required>
                                 <div class='invalid-feedback'>Wypełnij to pole.</div>
                             </div>
                             <div class='mt-3'>

@@ -33,14 +33,14 @@ if(isset($_POST['wyslij']))
     $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email';");
     while($rezultat = mysqli_fetch_array($zapytanie))
     {
-        $mail->Body='Zamówienie wysłane przez '.$rezultat['imie'].' '.$rezultat['nazwisko'].' ('.$rezultat['email'].')';
+        $mail->Body='Zamówienie wysłane przez: '.$rezultat['imie'].' '.$rezultat['nazwisko'].' ('.$rezultat['email'].')';
     }
     $file_to_attach='C:/zamowienia/'.$plik; 
     $mail->AddAttachment($file_to_attach , $plik);
 
     $mail->Send();
 
-    mysqli_query($polaczenie, "UPDATE zamowienia SET status=1 WHERE email='$login' AND plik='$plik';");
+    mysqli_query($polaczenie, "UPDATE zamowienia SET status=1 WHERE email='$email' AND plik='$plik';");
     header('Location: ./');
     mysqli_close($polaczenie);
 }

@@ -97,7 +97,7 @@
                                     <button type='button' class='btn btn-sm btn-outline-warning btn-block mb-2' data-bs-toggle='modal' data-bs-target='#a$rezultat[indeks]'>Opis</button>
                                 </div>
                                 <form method='get' action='../koszyk' class='input-group input-group-sm'>
-                                    <input type='number' class='form-control' name='ilosc' id='ilosc' placeholder='Ilość' min='1'>
+                                    <input type='number' class='form-control' name='ilosc' id='ilosc' placeholder='Ilość' min='1' value='1'>
                                     <span class='input-group-text'>$rezultat[jednostka]</span>
                                     <button type='submit' name='indeks' value='$rezultat[indeks]' class='btn btn-outline-warning'>Dodaj do koszyka</button>
                                 </form>
@@ -142,7 +142,7 @@
                                     <button type='button' class='btn btn-sm btn-outline-warning btn-block mb-2' data-bs-toggle='modal' data-bs-target='#a$rezultat[indeks]'>Opis</button>
                                 </div>
                                 <form method='get' action='../koszyk' class='input-group input-group-sm'>
-                                    <input type='number' class='form-control' name='ilosc' id='ilosc' placeholder='Ilość' min='1'>
+                                    <input type='number' class='form-control' name='ilosc' id='ilosc' placeholder='Ilość' min='1' value='1'>
                                     <span class='input-group-text'>$rezultat[jednostka]</span>
                                     <button type='submit' name='indeks' value='$rezultat[indeks]' class='btn btn-outline-warning'>Dodaj do koszyka</button>
                                 </form>

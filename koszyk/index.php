@@ -90,7 +90,7 @@
                             $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email';");
 							while($rezultat = mysqli_fetch_array($zapytanie))
                             {
-                                $txt="\tDATA ZŁOŻENIA ZAMÓWIENIA
+                                $txt="\tDATA UTWORZENIA ZAMÓWIENIA
 ".date("Y-m-d")."\n
 \tDANE ZAMAWIAJĄCEGO
 Imię: $rezultat[imie]
