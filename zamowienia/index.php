@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+        <nav class="navbar navbar-expand-md navbar-light bg-warning">
             <div class="container-fluid">
                 <a class="navbard-brand" href="../"><img src="../logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
@@ -42,6 +42,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../koszyk">Koszyk</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://drive.google.com/file/d/1kxkXz4hvwu61drGq7_A1LlD6wMdKWTXU/view?fbclid=IwAR1eeNuJlsiHI4D4WXNefFuOs58uT2kL5vNZ1FFlINqCn17HJBbnz6ScsKM">Katalog</a>
                         </li>
                     </ul>
                     <form method='get' action='../produkty'>
@@ -79,7 +82,35 @@
                                 <td>";
                             if($rezultat['status']==0)
                             {
-                                echo "<form method='post' action='wyslij.php'><button type='submit' class='btn btn-outline-warning btn-sm' name='wyslij' value='$rezultat[plik]'>Złóż</button></form>";
+                                echo "<div class='modal' id='a$rezultat[id]'>
+                                    <div class='modal-dialog'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h5 class='modal-title'>Zamówienie z dnia $rezultat[data]</h5>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+                                            </div>
+                                            <form method='post' action='wyslij.php'>
+                                                <div class='modal-body'>
+                                                    <div class='form-check'>
+                                                        <input type='radio' class='form-check-input' id='opcja1' name='opcja' value='opcja1'>Chcę otrzymać dokładnie te zamawiane produkty
+                                                        <label class='form-check-label' for='opcja1'></label>
+                                                    </div>
+                                                    <div class='form-check'>
+                                                        <input type='radio' class='form-check-input' id='opcja2' name='opcja' value='opcja2' checked>Chcę otrzymać podobne produkty
+                                                        <label class='form-check-label' for='opcja2'></label>
+                                                    </div>
+                                                    <label for='uwagi'>Uwagi do zamówienia:</label>
+                                                    <textarea class='form-control' rows='5' id='uwagi' name='uwagi'></textarea> 
+                                                </div>
+                                                <div class='modal-footer'>
+                                                    <button type='submit' class='btn btn-outline-warning' name='wyslij' value='$rezultat[plik]'>Potwierdź</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type='button' class='btn btn-sm btn-outline-warning btn-block mb-2' data-bs-toggle='modal' data-bs-target='#a$rezultat[id]'>Potwierdź</button>
+                                ";
                             }
                             else
                             {

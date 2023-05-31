@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+        <nav class="navbar navbar-expand-md navbar-light bg-warning">
             <div class="container-fluid">
                 <a class="navbard-brand" href="../"><img src="../logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
@@ -47,6 +47,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="../koszyk">Koszyk</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://drive.google.com/file/d/1kxkXz4hvwu61drGq7_A1LlD6wMdKWTXU/view?fbclid=IwAR1eeNuJlsiHI4D4WXNefFuOs58uT2kL5vNZ1FFlINqCn17HJBbnz6ScsKM">Katalog</a>
+                        </li>
                     </ul>
                     <form method='get' action='../produkty'>
                         <div class="input-group">
@@ -81,7 +84,6 @@
 						{
 							mysqli_query($polaczenie, "DELETE FROM koszyk WHERE email='$email';");
 						}
-                        //tworzenie zamowienia
 						if(isset($_POST['utworz']))
 						{
 							$plik=$email.date("Y-m-d-H-i-s").".txt";
@@ -117,23 +119,6 @@ Lp.\tIndeks\tIlość\tJ.m.\tNazwa
                             mysqli_query($polaczenie, "DELETE FROM koszyk WHERE email='$email';");
                             echo "<div class='alert alert-success mt-4'>Utworzono zamówienie. Możesz je zobaczyć i złożyć w zakładce <a href='../zamowienia'>Utworzone zamówienia</a></div>";
 						}
-						if(isset($_GET['indeks'])&&!empty($_GET['ilosc'])&&$_GET['ilosc']!=0)
-						{
-							$indeks=$_GET['indeks'];
-							$ilosc=$_GET['ilosc'];
-							$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE email='$email' AND indeks='$indeks';");
-                            $rezultat = mysqli_fetch_array($zapytanie);
-							if(is_array($rezultat))
-                            {
-								$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE email='$email' AND indeks='$indeks';");
-								$suma=$ilosc+$rezultat['ilosc'];
-								mysqli_query($polaczenie, "UPDATE koszyk SET ilosc = '$suma' WHERE email='$email' AND indeks = '$indeks';");
-							}
-							else
-							{
-								mysqli_query($polaczenie, "INSERT INTO koszyk (`id`, `email`, `indeks`, `ilosc`) VALUES (NULL, '$email', '$indeks', '$ilosc');");
-							}
-						}
 						$zapytanie=mysqli_query($polaczenie, "SELECT * FROM koszyk WHERE email='$email';");
                         $rezultat = mysqli_fetch_array($zapytanie);
 						if(is_array($rezultat))
@@ -150,8 +135,8 @@ Lp.\tIndeks\tIlość\tJ.m.\tNazwa
                                 </tr>";
 							}
 							echo "</tbody></table>
-							<form method='post' action=''><button type='submit' name='utworz' class='btn btn-outline-warning float-start mt-4'>Utwórz zamówienie</button></form>
-							<form method='post' action=''><button type='submit' name='usunwszystko' class='btn btn-outline-danger float-end mt-4'>Usuń całą zawartość koszyka</button></form>";
+                            <form method='post' action=''><button type='submit' name='usunwszystko' class='btn btn-outline-danger float-start mt-4'>Usuń całą zawartość koszyka</button></form>
+							<form method='post' action=''><button type='submit' name='utworz' class='btn btn-outline-warning float-end mt-4'>Utwórz zamówienie</button></form>";
 						}
 						else
 						{
@@ -160,7 +145,7 @@ Lp.\tIndeks\tIlość\tJ.m.\tNazwa
 					}
 					else
 					{
-						echo "<div class='alert alert-info mt-4'>Aby dodać produkty do koszyka musisz się zalogować</div>";
+						echo "<div class='alert alert-info mt-4'>Aby dodawać produkty do koszyka musisz się zalogować</div>";
 					}
                     mysqli_close($polaczenie);
 				?>

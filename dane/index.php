@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+        <nav class="navbar navbar-expand-md navbar-light bg-warning">
             <div class="container-fluid">
                 <a class="navbard-brand" href="../"><img src="../logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
@@ -42,6 +42,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../koszyk">Koszyk</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://drive.google.com/file/d/1kxkXz4hvwu61drGq7_A1LlD6wMdKWTXU/view?fbclid=IwAR1eeNuJlsiHI4D4WXNefFuOs58uT2kL5vNZ1FFlINqCn17HJBbnz6ScsKM">Katalog</a>
                         </li>
                     </ul>
                     <form method='get' action='../produkty'>
@@ -101,12 +104,6 @@
                                     <label for='nip' class='form-label'>NIP firmy:</label>
                                     <input type='text' class='form-control' id='nip' placeholder='NIP firmy' name='nip' value='$rezultat[nip]' required>
                                     <div class='invalid-feedback'>Wypełnij to pole.</div>
-                                </div>
-                                <div class='form-check mt-3'>
-                                    <input class='form-check-input' type='checkbox' id='myCheck' name='remember' required>
-                                    <label class='form-check-label' for='myCheck'>Zgadzam się na wykorzystywanie podanych danych przez Duet - Papier s.c. w celach kontaktowych.</label>
-                                    <div class='valid-feedback'></div>
-                                    <div class='invalid-feedback'>Aby zmienić dane konta musisz wyrazić zgodę.</div>
                                 </div>
                                 <button type='submit' name='zmien' class='btn btn-outline-warning mt-3 mb-4'>Zmień dane</button>
                             </form>";

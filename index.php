@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+        <nav class="navbar navbar-expand-md navbar-light bg-warning">
             <div class="container-fluid">
                 <a class="navbard-brand" href=""><img src="logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
@@ -43,6 +43,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="koszyk">Koszyk</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://drive.google.com/file/d/1kxkXz4hvwu61drGq7_A1LlD6wMdKWTXU/view?fbclid=IwAR1eeNuJlsiHI4D4WXNefFuOs58uT2kL5vNZ1FFlINqCn17HJBbnz6ScsKM">Katalog</a>
+                        </li>
                     </ul>
                     <form method='get' action='produkty'>
                         <div class="input-group">
@@ -57,9 +60,15 @@
     <div class="container mb-4 mt-4">
         <div class="row">
             <div class="col-12 text-center">
-                <h1 class="display-1"><b><i>Duet - Papier s.c.</i></b></h1>
-                <h2>Hurtownia Artykułów Biurowych w Jaśle</h2>
-                <img src="certyfikat.png" class="rounded img-fluid mt-3" alt="Certyfikat autoryzacyjny">
+                <img src="banner.png" class="rounded img-fluid mt-3" alt="Banner">
+            </div>
+            <div class="col-12 mt-5">
+                <p class='h5'>Witamy na naszej platformie zamówień!</br>
+                Platforma zawiera tylko część naszej oferty, z czasem będziemy ją rozwijać. Jeśli nie znajdziesz szukanego produktu a chcesz go zamówić, dołącz proszę informację w uwagach do zamówienia.</br>
+                Pragniemy zaznaczyć, że prezentowana strona jest w formie testów, zauważone błędy można zgłaszać – za co z góry dziękujemy.</p>
+            </div>
+            <div class="col-12 text-center">
+                <img src="firmy.png" class="rounded img-fluid mt-3" alt="Firmy">
             </div>
         </div>
         <div class="row mt-4 mb-4">
@@ -70,6 +79,7 @@
                         <tr><td>13 446 83 31</td></tr>
                         <tr><td>602 705 798</td></tr>
                         <tr><td>880 223 630</td></tr>
+                        <tr><td>duetpapier@wp.pl</td></tr>
                     </tbody>
                 </table>
             </div>

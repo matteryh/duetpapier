@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+        <nav class="navbar navbar-expand-md navbar-light bg-warning">
             <div class="container-fluid">
                 <a class="navbard-brand" href="../"><img src="../logo.png" class="rounded" style="height:40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pasek">
@@ -43,6 +43,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="../koszyk">Koszyk</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://drive.google.com/file/d/1kxkXz4hvwu61drGq7_A1LlD6wMdKWTXU/view?fbclid=IwAR1eeNuJlsiHI4D4WXNefFuOs58uT2kL5vNZ1FFlINqCn17HJBbnz6ScsKM">Katalog</a>
+                        </li>
                     </ul>
                     <form method='get' action='../produkty'>
                         <div class="input-group">
@@ -75,22 +78,30 @@
                         {
                             $email=$_POST['email'];
                             $haslo=$_POST['haslo'];
-                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email' AND haslo='$haslo'");
+                            $zapytanie=mysqli_query($polaczenie, "SELECT * FROM uzytkownicy WHERE email='$email'");
                             $rezultat = mysqli_fetch_array($zapytanie);
                             if(is_array($rezultat))
                             {
-                                $_SESSION['email']=$rezultat['email'];
-                                echo("<meta http-equiv='refresh' content='1'>");
+                                $hash=$rezultat['haslo'];
+                                if(password_verify($haslo, $hash)==TRUE)
+                                {
+                                    $_SESSION['email']=$rezultat['email'];
+                                    echo("<meta http-equiv='refresh' content='1'>");
+                                }
+                                else
+                                {
+                                    echo "<div class='alert alert-danger mt-4'>Podane hasło jest nieprawidłowe!</div>";
+                                }
                             }
                             else
                             {
-                                echo "<div class='alert alert-danger mt-4'>Nieprawidłowy adres email i/lub hasło!</div>";
+                                echo "<div class='alert alert-danger mt-4'>Użytkownik z tym adresem e-mail nie jest zarejestrowany na stronie!</div>";
                             }
                         }
                         echo "<form action='' method='post' class='was-validated'>
                             <div class='mt-4'>
                                 <label for='email' class='form-label'>Adres e-mail:</label>
-                                <input type='text' class='form-control' id='email' placeholder='Adres e-mail' name='email' required>
+                                <input type='text' class='form-control' id='email' placeholder='Adres e-mail' name='email' required pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$$'>
                                 <div class='invalid-feedback'>Wypełnij to pole.</div>
                             </div>
                             <div class='mt-3'>
@@ -100,7 +111,8 @@
                             </div>
                             <button type='submit' name='zaloguj' class='btn btn-outline-warning mt-3'>Zaloguj się</button>
                         </form> 
-                        <p class='mt-3'>Nie masz konta?<a href='../zarejestruj' type='button' class='btn btn-outline-warning ms-3'>Zarejestruj się</a></p>";
+                        <p class='mt-3'>Nie masz konta?<a href='../zarejestruj' type='button' class='btn btn-outline-warning ms-3'>Zarejestruj się</a></p>
+                        <p class='mt-3'>Zapomniałeś hasła?<a href='../odzyskiwanie' type='button' class='btn btn-outline-warning ms-3'>Odzyskaj konto</a></p>";
                     }
                     mysqli_close($polaczenie);
                 ?>
